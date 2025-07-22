@@ -1,0 +1,9 @@
+
+[build]
+  # on installe proprement et on build sans SSR
+  command = "npm ci && npm run build"
+  publish = "dist/pandacourse/browser"
+
+[[plugins]]
+  package  = "@netlify/angular-runtime"
+  disabled = true
