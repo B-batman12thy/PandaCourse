@@ -1,4 +1,4 @@
-import { Component, OnInit }     from '@angular/core';
+import { Component, OnInit, inject }     from '@angular/core';
 import { Router, RouterModule }          from '@angular/router';
 import { CommonModule }          from '@angular/common';
 import { ApiService }            from '../../core/api/api.service';
@@ -12,6 +12,9 @@ import { FormsModule }           from '@angular/forms';
   templateUrl: './course-catalog.component.html',
 })
 export class CourseCatalogComponent implements OnInit {
+  private api = inject(ApiService);
+  private router = inject(Router);
+
   courses: Course[] = [];
   filteredCourses: Course[] = [];
   pagedCourses: Course[] = [];
@@ -22,7 +25,10 @@ export class CourseCatalogComponent implements OnInit {
   totalPages = 0;
   pages: number[] = [];
 
-  constructor(private api: ApiService, private router: Router  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit() {
     this.api.getCourses().subscribe(cs => {

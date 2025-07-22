@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterModule }            from '@angular/router';
 import { ApiService }        from '../../core/api/api.service';
 import { Course }            from '../../shared/models/course.model';
@@ -11,6 +11,10 @@ import { ToastService } from '../../core/toast.service';
   imports: [CommonModule, RouterModule],
 })
 export class CourseListComponent implements OnInit {
+  private api = inject(ApiService);
+  private router = inject(Router);
+  private toasts = inject(ToastService);
+
   courses: Course[] = [];
   pagedCourses: Course[] = [];
   currentPage = 1;
@@ -18,7 +22,10 @@ export class CourseListComponent implements OnInit {
   totalPages = 0;
   pages: number[] = [];
 
-  constructor(private api: ApiService, private router: Router,private toasts: ToastService) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit() {
     this.api.getCourses()

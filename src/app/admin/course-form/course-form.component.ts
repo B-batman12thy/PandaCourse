@@ -1,5 +1,5 @@
 // src/app/admin/course-form/course-form.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -23,17 +23,20 @@ import { ToastService } from '../../core/toast.service';
   templateUrl: './course-form.component.html'
 })
 export class CourseFormComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private api = inject(ApiService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private toasts = inject(ToastService);
+
   form!: FormGroup;
   isEdit = false;
   courseId!: string;
 
-  constructor(
-    private fb: FormBuilder,
-    private api: ApiService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private toasts: ToastService
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     // Initialise le formulaire

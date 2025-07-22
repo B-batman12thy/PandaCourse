@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -10,8 +10,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     CommonModule, HttpClientModule
   ]
 })
-export class CoreModule { 
-   constructor(@Optional() @SkipSelf() parent: CoreModule) {
+export class CoreModule {
+
+   /** Inserted by Angular inject() migration for backwards compatibility */
+   constructor(...args: unknown[]);
+ 
+   constructor() {
+    const parent = inject(CoreModule, { optional: true, skipSelf: true })!;
+
     if (parent) throw new Error('CoreModule is already loaded.');
   }
 }

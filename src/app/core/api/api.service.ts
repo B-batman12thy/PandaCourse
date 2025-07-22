@@ -1,13 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Course }     from '../../shared/models/course.model';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
+  private http = inject(HttpClient);
+
   private baseUrl = 'http://localhost:3000/courses';
 
-  constructor(private http: HttpClient) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   getCourses(): Observable<Course[]> {
     return this.http.get<Course[]>(this.baseUrl);

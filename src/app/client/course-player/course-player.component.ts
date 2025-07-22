@@ -1,5 +1,5 @@
 // src/app/client/course-player/course-player.component.ts
-import { Component, OnInit }           from '@angular/core';
+import { Component, OnInit, inject }           from '@angular/core';
 import { CommonModule }                from '@angular/common';
 import { ActivatedRoute, RouterLink }              from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -13,14 +13,17 @@ import { Course }                      from '../../shared/models/course.model';
   templateUrl: './course-player.component.html',
 })
 export class CoursePlayerComponent implements OnInit {
+  private api = inject(ApiService);
+  private route = inject(ActivatedRoute);
+  private sanitizer = inject(DomSanitizer);
+
   course?: Course;
   videoUrl?: SafeResourceUrl;
 
-  constructor(
-    private api: ApiService,
-    private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');

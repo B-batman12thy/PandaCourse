@@ -1,4 +1,4 @@
-import { Component, OnInit }            from '@angular/core';
+import { Component, OnInit, inject }            from '@angular/core';
 import { CommonModule }                 from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { ApiService }                   from '../../core/api/api.service';
@@ -14,12 +14,15 @@ import { Course }                       from '../../shared/models/course.model';
   templateUrl: './course-detail.component.html',
 })
 export class CourseDetailComponent implements OnInit {
+  private api = inject(ApiService);
+  private route = inject(ActivatedRoute);
+
   course?: Course;
 
-  constructor(
-    private api: ApiService,
-    private route: ActivatedRoute
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');

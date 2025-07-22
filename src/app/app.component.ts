@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { AuthService } from './core/auth/auth.service';
@@ -13,7 +13,13 @@ import { ToastService } from './core/toast.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  auth = inject(AuthService);
+  private toast = inject(ToastService);
+
   title = 'pandacourse';
-    constructor(public auth: AuthService,private toast: ToastService) {}
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+    constructor() {}
 
 }

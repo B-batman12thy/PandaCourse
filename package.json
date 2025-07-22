@@ -15,8 +15,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test:ci": "jest --runInBand",
-       "test:coverage": "ng test --code-coverage --watch=false"
-
+    "test:coverage": "ng test --code-coverage --watch=false"
   },
   "private": true,
   "dependencies": {
@@ -43,8 +42,10 @@
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
+    "angular-eslint": "20.1.1",
     "autoprefixer": "^10.4.21",
     "cypress": "^14.5.2",
+    "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.3",
     "jasmine-core": "~5.6.0",
@@ -57,6 +58,7 @@
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "tailwindcss": "^4.1.11",
-    "typescript": "~5.7.2"
+    "typescript": "~5.7.2",
+    "typescript-eslint": "8.34.1"
   }
 }

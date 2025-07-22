@@ -1,9 +1,11 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser }               from '@angular/common';
 import { BehaviorSubject, Observable }     from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private platformId = inject<Object>(PLATFORM_ID);
+
   private tokenKey = 'auth_token';
   private roleKey  = 'auth_role';
 
@@ -11,9 +13,10 @@ export class AuthService {
   private _loggedIn = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this._loggedIn.asObservable();
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     // une fois qu'on est constructeur, on peut tester le platform
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem(this.tokenKey);
