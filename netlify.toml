@@ -1,4 +1,9 @@
 [build]
-  # Votre commande de build sans SSR (juste statique)
-  command   = "npm run build -- --no-prerender"
-  publish   = "dist/pandacourse/browser"
+  publish = "dist/pandacourse/browser"
+  command = "npm run build"
+
+# SPA fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.csr.html"
+  status = 200
