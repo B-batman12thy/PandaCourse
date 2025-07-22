@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router, RouterModule, } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../core/api/api.service';
 import { Course } from '../../shared/models/course.model';
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,7 @@ import { ToastService } from '../../core/toast.service';
   templateUrl: './course-list.component.html',
 })
 export class CourseListComponent implements OnInit {
-  private api    = inject(ApiService);
+  private api = inject(ApiService);
   private router = inject(Router);
   private toasts = inject(ToastService);
 
@@ -64,7 +64,7 @@ export class CourseListComponent implements OnInit {
     if (!confirm('Supprimer ce cours ?')) return;
     this.api.deleteCourse(id).subscribe({
       next: () => {
-        this.courses = this.courses.filter(c => c.id !== id);
+        this.courses = this.courses.filter((c) => c.id !== id);
         this.updatePagedCourses();
         this.toasts.show('Cours supprimé !', 'success');
       },

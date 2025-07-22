@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './course-catalog.component.html',
 })
 export class CourseCatalogComponent implements OnInit {
-  private api    = inject(ApiService);
+  private api = inject(ApiService);
   private router = inject(Router);
 
   courses: Course[] = [];
@@ -27,7 +27,7 @@ export class CourseCatalogComponent implements OnInit {
   pages: number[] = [];
 
   ngOnInit() {
-    this.api.getCourses().subscribe(cs => {
+    this.api.getCourses().subscribe((cs) => {
       this.courses = cs;
       this.applyFilter();
     });
@@ -36,9 +36,8 @@ export class CourseCatalogComponent implements OnInit {
   applyFilter() {
     const term = this.searchTerm.trim().toLowerCase();
     this.filteredCourses = term
-      ? this.courses.filter(c =>
-          c.title.toLowerCase().includes(term) ||
-          c.description.toLowerCase().includes(term)
+      ? this.courses.filter(
+          (c) => c.title.toLowerCase().includes(term) || c.description.toLowerCase().includes(term),
         )
       : [...this.courses];
 

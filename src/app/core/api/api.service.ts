@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Course }     from '../../shared/models/course.model';
+import { Course } from '../../shared/models/course.model';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
@@ -12,11 +12,11 @@ export class ApiService {
     return this.http.get<Course[]>(this.baseUrl);
   }
 
-  getCourse(id: string): Observable<Course> {                   
+  getCourse(id: string): Observable<Course> {
     return this.http.get<Course>(`${this.baseUrl}/${id}`);
   }
 
-  createCourse(course: Course): Observable<Course> {            
+  createCourse(course: Course): Observable<Course> {
     return this.http.post<Course>(this.baseUrl, course);
   }
 

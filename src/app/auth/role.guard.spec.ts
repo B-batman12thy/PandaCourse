@@ -13,10 +13,14 @@ describe('RoleGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [RoleGuard, AuthService, { provide: Router, useValue: { navigate: jasmine.createSpy('nav') } }]
+      providers: [
+        RoleGuard,
+        AuthService,
+        { provide: Router, useValue: { navigate: jasmine.createSpy('nav') } },
+      ],
     });
-    guard  = TestBed.inject(RoleGuard);
-    auth   = TestBed.inject(AuthService);
+    guard = TestBed.inject(RoleGuard);
+    auth = TestBed.inject(AuthService);
     router = TestBed.inject(Router);
     // stub d'un ActivatedRouteSnapshot simulé
     route = new ActivatedRouteSnapshot();

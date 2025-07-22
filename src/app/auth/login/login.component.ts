@@ -8,8 +8,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './login.component.html'
-
+  templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -20,14 +19,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
   onSubmit(): void {
     if (this.form.invalid) return;
-    const { username,} = this.form.value;
-    if (this.auth.login(username,)) {
+    const { username } = this.form.value;
+    if (this.auth.login(username)) {
       if (this.auth.getRole() === 'admin') {
         this.router.navigate(['/admin']);
       } else {

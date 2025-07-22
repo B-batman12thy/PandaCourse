@@ -13,10 +13,10 @@ describe('AuthGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
-      providers: [AuthService]
+      providers: [AuthService],
     });
-    guard  = TestBed.inject(AuthGuard);
-    auth   = TestBed.inject(AuthService);
+    guard = TestBed.inject(AuthGuard);
+    auth = TestBed.inject(AuthService);
     router = TestBed.inject(Router);
     spyOn(router, 'navigate');
   });

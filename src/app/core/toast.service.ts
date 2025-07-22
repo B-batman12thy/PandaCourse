@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
 export interface Toast {
-  text:  string;
-  type:  'success' | 'error' | 'info';
-  id?:   number;
+  text: string;
+  type: 'success' | 'error' | 'info';
+  id?: number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -26,7 +26,7 @@ export class ToastService {
   }
 
   remove(id: number) {
-    this.toasts = this.toasts.filter(t => t.id !== id);
+    this.toasts = this.toasts.filter((t) => t.id !== id);
     this.updates.next(this.toasts);
   }
 }

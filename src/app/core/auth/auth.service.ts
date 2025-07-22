@@ -54,18 +54,14 @@ export class AuthService {
    * Récupère le token en localStorage
    */
   getToken(): string | null {
-    return isPlatformBrowser(this.platformId)
-      ? localStorage.getItem(this.tokenKey)
-      : null;
+    return isPlatformBrowser(this.platformId) ? localStorage.getItem(this.tokenKey) : null;
   }
 
   /**
    * Récupère le rôle en localStorage
    */
   getRole(): string | null {
-    return isPlatformBrowser(this.platformId)
-      ? localStorage.getItem(this.roleKey)
-      : null;
+    return isPlatformBrowser(this.platformId) ? localStorage.getItem(this.roleKey) : null;
   }
 
   /**

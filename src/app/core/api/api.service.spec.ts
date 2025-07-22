@@ -1,11 +1,8 @@
 // src/app/core/api/api.service.spec.ts
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ApiService } from './api.service';
-import { Course }     from '../../shared/models/course.model';
+import { Course } from '../../shared/models/course.model';
 
 describe('ApiService', () => {
   let service: ApiService;
@@ -15,10 +12,10 @@ describe('ApiService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ApiService]
+      providers: [ApiService],
     });
     service = TestBed.inject(ApiService);
-    http    = TestBed.inject(HttpTestingController);
+    http = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => http.verify());
@@ -31,10 +28,10 @@ describe('ApiService', () => {
         description: 'Desc A',
         imageUrl: 'imgA.png',
         videoUrl: 'urlA.mp4',
-        duration: 10
-      }
+        duration: 10,
+      },
     ];
-    service.getCourses().subscribe(cs => expect(cs).toEqual(mockCourses));
+    service.getCourses().subscribe((cs) => expect(cs).toEqual(mockCourses));
     const req = http.expectOne(baseUrl);
     expect(req.request.method).toBe('GET');
     req.flush(mockCourses);
@@ -47,10 +44,10 @@ describe('ApiService', () => {
       description: 'Desc X',
       imageUrl: 'imgX.png',
       videoUrl: 'urlX.mp4',
-      duration: 5
+      duration: 5,
     };
     // on passe l'id en string
-    service.getCourse('42').subscribe(c => expect(c).toEqual(mock));
+    service.getCourse('42').subscribe((c) => expect(c).toEqual(mock));
     const req = http.expectOne(`${baseUrl}/42`);
     expect(req.request.method).toBe('GET');
     req.flush(mock);
@@ -63,9 +60,9 @@ describe('ApiService', () => {
       description: 'Desc Nouveau',
       imageUrl: 'imgNew.png',
       videoUrl: 'urlNew.mp4',
-      duration: 15
+      duration: 15,
     };
-    service.createCourse(newCourse).subscribe(c => expect(c).toEqual(newCourse));
+    service.createCourse(newCourse).subscribe((c) => expect(c).toEqual(newCourse));
     const req = http.expectOne(baseUrl);
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(newCourse);
@@ -79,10 +76,10 @@ describe('ApiService', () => {
       description: 'Desc Modifiée',
       imageUrl: 'imgUpd.png',
       videoUrl: 'urlUpd.mp4',
-      duration: 20
+      duration: 20,
     };
     // on passe l'id en string
-    service.updateCourse('5', updated).subscribe(c => expect(c).toEqual(updated));
+    service.updateCourse('5', updated).subscribe((c) => expect(c).toEqual(updated));
     const req = http.expectOne(`${baseUrl}/5`);
     expect(req.request.method).toBe('PUT');
     expect(req.request.body).toEqual(updated);
@@ -91,7 +88,7 @@ describe('ApiService', () => {
 
   it('deleteCourse() doit DELETE /courses/:id et renvoyer void', () => {
     // on passe l'id en string
-    service.deleteCourse('7').subscribe(res => expect(res).toBeUndefined());
+    service.deleteCourse('7').subscribe((res) => expect(res).toBeUndefined());
     const req = http.expectOne(`${baseUrl}/7`);
     expect(req.request.method).toBe('DELETE');
     req.flush(null);
