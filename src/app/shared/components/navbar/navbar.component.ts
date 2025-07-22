@@ -14,11 +14,6 @@ export class NavbarComponent {
   auth = inject(AuthService);
   private router = inject(Router);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   logout(): void {
     this.auth.logout();
     this.router.navigate(['/login']);

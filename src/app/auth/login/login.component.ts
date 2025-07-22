@@ -17,12 +17,6 @@ export class LoginComponent implements OnInit {
   private router = inject(Router);
 
   form!: FormGroup;
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     this.form = this.fb.group({
       username: ['', Validators.required],
@@ -32,9 +26,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.invalid) return;
-    const { username, password } = this.form.value;
-    if (this.auth.login(username, password)) {
-      // redirection selon rôle
+    const { username,} = this.form.value;
+    if (this.auth.login(username,)) {
       if (this.auth.getRole() === 'admin') {
         this.router.navigate(['/admin']);
       } else {

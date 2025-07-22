@@ -1,9 +1,10 @@
-import { Component, OnInit, inject }     from '@angular/core';
-import { Router, RouterModule }          from '@angular/router';
-import { CommonModule }          from '@angular/common';
-import { ApiService }            from '../../core/api/api.service';
-import { Course }                from '../../shared/models/course.model';
-import { FormsModule }           from '@angular/forms';
+// src/app/client/course-catalog/course-catalog.component.ts
+import { Component, OnInit, inject } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ApiService } from '../../core/api/api.service';
+import { Course } from '../../shared/models/course.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-course-catalog',
@@ -12,23 +13,18 @@ import { FormsModule }           from '@angular/forms';
   templateUrl: './course-catalog.component.html',
 })
 export class CourseCatalogComponent implements OnInit {
-  private api = inject(ApiService);
+  private api    = inject(ApiService);
   private router = inject(Router);
 
   courses: Course[] = [];
   filteredCourses: Course[] = [];
   pagedCourses: Course[] = [];
-  searchTerm: string = '';
+  searchTerm = '';
 
   currentPage = 1;
   pageSize = 6;
   totalPages = 0;
   pages: number[] = [];
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 
   ngOnInit() {
     this.api.getCourses().subscribe(cs => {
@@ -46,7 +42,6 @@ export class CourseCatalogComponent implements OnInit {
         )
       : [...this.courses];
 
-    // recalcul pagination
     this.totalPages = Math.ceil(this.filteredCourses.length / this.pageSize);
     this.currentPage = 1;
     this.updatePagedCourses();
@@ -76,6 +71,7 @@ export class CourseCatalogComponent implements OnInit {
       this.updatePagedCourses();
     }
   }
+
   goToDetail(id: string) {
     this.router.navigate(['/courses', id]);
   }

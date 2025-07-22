@@ -17,9 +17,4 @@ export class AppComponent {
   private toast = inject(ToastService);
 
   title = 'pandacourse';
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-    constructor() {}
-
 }

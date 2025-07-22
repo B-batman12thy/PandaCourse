@@ -14,5 +14,5 @@ import { RouterModule }    from '@angular/router';
   styleUrls:   ['./admin-dashboard.component.scss']  // ← pluriel !
 })
 export class AdminDashboardComponent {
-  logout(){}
+  // logout(){}
 }

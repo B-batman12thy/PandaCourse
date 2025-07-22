@@ -1,33 +1,37 @@
+// src/app/core/auth/auth.service.ts
 import { Injectable, PLATFORM_ID, inject } from '@angular/core';
-import { isPlatformBrowser }               from '@angular/common';
-import { BehaviorSubject, Observable }     from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private platformId = inject<Object>(PLATFORM_ID);
+  // Platform ID obtained via inject()
+  private platformId = inject(PLATFORM_ID);
 
   private tokenKey = 'auth_token';
-  private roleKey  = 'auth_role';
+  private roleKey = 'auth_role';
 
-  // on initialise d'abord sans appeler localStorage
+  // Initialise l'état de connexion sans accéder à localStorage
   private _loggedIn = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this._loggedIn.asObservable();
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
-    // une fois qu'on est constructeur, on peut tester le platform
+    // Vérifie localStorage côté client
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem(this.tokenKey);
       this._loggedIn.next(!!token);
     }
   }
 
-  login(username: string, password: string): boolean {
-    if (!isPlatformBrowser(this.platformId)) return false;
+  /**
+   * Simule une connexion et stocke un token et rôle factices
+   */
+  login(username: string): boolean {
+    if (!isPlatformBrowser(this.platformId)) {
+      return false;
+    }
     const fakeToken = 'JWT-TOKEN-123';
-    const fakeRole  = username === 'admin' ? 'admin' : 'student';
+    const fakeRole = username === 'admin' ? 'admin' : 'student';
 
     localStorage.setItem(this.tokenKey, fakeToken);
     localStorage.setItem(this.roleKey, fakeRole);
@@ -35,6 +39,9 @@ export class AuthService {
     return true;
   }
 
+  /**
+   * Déconnecte l'utilisateur
+   */
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem(this.tokenKey);
@@ -43,19 +50,27 @@ export class AuthService {
     this._loggedIn.next(false);
   }
 
+  /**
+   * Récupère le token en localStorage
+   */
   getToken(): string | null {
-    if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem(this.tokenKey);
-    }
-    return null;
+    return isPlatformBrowser(this.platformId)
+      ? localStorage.getItem(this.tokenKey)
+      : null;
   }
 
+  /**
+   * Récupère le rôle en localStorage
+   */
   getRole(): string | null {
-    if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem(this.roleKey);
-    }
-    return null;
+    return isPlatformBrowser(this.platformId)
+      ? localStorage.getItem(this.roleKey)
+      : null;
   }
+
+  /**
+   * Indique si l'utilisateur est connecté
+   */
   get isLoggedIn(): boolean {
     return this._loggedIn.getValue();
   }

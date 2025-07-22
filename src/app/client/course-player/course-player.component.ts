@@ -1,5 +1,4 @@
-// src/app/client/course-player/course-player.component.ts
-import { Component, OnInit, inject }           from '@angular/core';
+import { Component, inject, OnInit }           from '@angular/core';
 import { CommonModule }                from '@angular/common';
 import { ActivatedRoute, RouterLink }              from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -13,18 +12,11 @@ import { Course }                      from '../../shared/models/course.model';
   templateUrl: './course-player.component.html',
 })
 export class CoursePlayerComponent implements OnInit {
-  private api = inject(ApiService);
-  private route = inject(ActivatedRoute);
-  private sanitizer = inject(DomSanitizer);
-
   course?: Course;
   videoUrl?: SafeResourceUrl;
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
+    private api= inject(ApiService);
+    private route= inject(ActivatedRoute);
+    private sanitizer= inject(DomSanitizer);
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) return;
@@ -39,7 +31,6 @@ export class CoursePlayerComponent implements OnInit {
   }
 
   private sanitizeYoutubeUrl(url: string): SafeResourceUrl {
-    // extrait l'ID après "v="
     const match = url.match(/[?&]v=([^&]+)/);
     const videoId = match?.[1];
     if (!videoId) return '';

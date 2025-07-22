@@ -33,11 +33,6 @@ export class CourseFormComponent implements OnInit {
   isEdit = false;
   courseId!: string;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit(): void {
     // Initialise le formulaire
     this.form = this.fb.group({

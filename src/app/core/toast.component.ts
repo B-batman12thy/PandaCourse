@@ -35,11 +35,6 @@ export class ToastComponent implements OnInit {
   private toast = inject(ToastService);
 
   toasts: Toast[] = [];
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-  constructor() {}
-
   ngOnInit() {
     this.toast.getToasts().subscribe(ts => this.toasts = ts);
   }

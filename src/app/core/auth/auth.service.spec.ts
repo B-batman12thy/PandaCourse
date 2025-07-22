@@ -2,7 +2,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import { PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 
 describe('AuthService', () => {
   let service: AuthService;

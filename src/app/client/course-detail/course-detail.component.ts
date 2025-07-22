@@ -18,12 +18,6 @@ export class CourseDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
 
   course?: Course;
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {

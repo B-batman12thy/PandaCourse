@@ -1,17 +1,18 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router, RouterModule }            from '@angular/router';
-import { ApiService }        from '../../core/api/api.service';
-import { Course }            from '../../shared/models/course.model';
+import { Router, RouterModule, } from '@angular/router';
+import { ApiService } from '../../core/api/api.service';
+import { Course } from '../../shared/models/course.model';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../core/toast.service';
 
 @Component({
   selector: 'app-course-list',
-  templateUrl: './course-list.component.html',
+  standalone: true,
   imports: [CommonModule, RouterModule],
+  templateUrl: './course-list.component.html',
 })
 export class CourseListComponent implements OnInit {
-  private api = inject(ApiService);
+  private api    = inject(ApiService);
   private router = inject(Router);
   private toasts = inject(ToastService);
 
@@ -22,14 +23,8 @@ export class CourseListComponent implements OnInit {
   totalPages = 0;
   pages: number[] = [];
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
-
   ngOnInit() {
-    this.api.getCourses()
-    .subscribe((cs: Course[]) => {            // ← on indique explicitement Course[]
+    this.api.getCourses().subscribe((cs: Course[]) => {
       this.courses = cs;
       this.totalPages = Math.ceil(cs.length / this.pageSize);
       this.updatePagedCourses();
@@ -61,8 +56,7 @@ export class CourseListComponent implements OnInit {
     }
   }
 
- edit(id: string) {
-    // on passe l'id tel quel
+  edit(id: string) {
     this.router.navigate(['/admin/courses', id, 'edit']);
   }
 
@@ -70,16 +64,15 @@ export class CourseListComponent implements OnInit {
     if (!confirm('Supprimer ce cours ?')) return;
     this.api.deleteCourse(id).subscribe({
       next: () => {
-        // enlève le cours en local (et remonte la pagination)
         this.courses = this.courses.filter(c => c.id !== id);
         this.updatePagedCourses();
         this.toasts.show('Cours supprimé !', 'success');
       },
-      error: () => this.toasts.show('Erreur lors de la suppression', 'error')
+      error: () => this.toasts.show('Erreur lors de la suppression', 'error'),
     });
   }
+
   newCourse() {
     this.router.navigate(['/admin/courses/new']);
   }
-  
 }
