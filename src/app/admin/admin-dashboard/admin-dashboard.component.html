@@ -1,0 +1,45 @@
+<!-- src/app/admin/admin-dashboard/admin-dashboard.component.html -->
+<div class="min-h-screen bg-gray-50 flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white shadow-lg">
+    <div class="p-5.5 border-b">
+      <h2 class="text-xl font-bold text-gray-800">PandaCourse</h2>
+    </div>
+    <nav class="mt-4">
+      <a
+        routerLink="courses"
+        routerLinkActive="bg-gray-100 text-indigo-600"
+        class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 hover:text-indigo-600 transition"
+      >
+        <!-- …icone… -->Liste des cours
+      </a>
+      <a
+        routerLink="courses/new"
+        routerLinkActive="bg-gray-100 text-indigo-600"
+        class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 hover:text-indigo-600 transition"
+      >
+        <!-- …icone… -->Nouveau cours
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <div class="flex-1 flex flex-col">
+    <header class="flex justify-between items-center bg-white px-6 py-4 shadow">
+      <h1 class="text-2xl font-semibold text-gray-800">Espace Admin</h1>
+      <button
+        (click)="logout()"
+        class="flex items-center space-x-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition"
+      >
+        <!-- …icone… -->Déconnexion
+      </button>
+    </header>
+
+    <main class="p-6 flex-1 overflow-auto">
+      <!-- LES ROUTES ENFANTS S’AFFICHENT ICI -->
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+</div>

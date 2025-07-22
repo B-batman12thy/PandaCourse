@@ -1,4 +1,13 @@
-<app-navbar></app-navbar>
-<main class="app-container">
+<!-- src/app/app.component.html -->
+<ng-container *ngIf="auth.isLoggedIn; else onlyLogin">
+  <app-navbar></app-navbar>
   <router-outlet></router-outlet>
-</main>
+</ng-container>
+
+<ng-template #onlyLogin>
+  <!-- ta page de login se charge via le router -->
+  <router-outlet></router-outlet>
+</ng-template>
+
+<!-- Le composant toast reste monté en permanence -->
+<app-toasts></app-toasts>

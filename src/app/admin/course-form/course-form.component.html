@@ -1,1 +1,141 @@
-<p>course-form works!</p>
+<form [formGroup]="form" (ngSubmit)="save()">
+
+  <div class="space-y-12">
+
+    <!-- Section 1: Détails du cours -->
+    <div class="border-b border-gray-900/10 pb-12">
+      <h2 class="text-base/7 font-semibold text-gray-900">Détails du cours</h2>
+      <p class="mt-1 text-sm/6 text-gray-600">
+        Renseignez le titre et la description de votre cours.
+      </p>
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+        <!-- Titre -->
+        <div class="sm:col-span-4">
+          <label for="title" class="block text-sm/6 font-medium text-gray-900">
+            Titre
+          </label>
+          <div class="mt-2">
+            <input
+              id="title"
+              type="text"
+              formControlName="title"
+              placeholder="Ex : Intro à Angular"
+              class="block w-full rounded-md bg-white px-3 py-1.5
+                     outline outline-1 -outline-offset-1 outline-gray-300
+                     placeholder:text-gray-400 focus:outline focus:outline-2
+                     focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            />
+          </div>
+          <p *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
+             class="mt-2 text-sm text-red-600">
+            Le titre est requis.
+          </p>
+        </div>
+
+        <!-- Description -->
+        <div class="col-span-full">
+          <label for="description" class="block text-sm/6 font-medium text-gray-900">
+            Description
+          </label>
+          <div class="mt-2">
+            <textarea
+              id="description"
+              rows="3"
+              formControlName="description"
+              placeholder="Brève description du cours"
+              class="block w-full rounded-md bg-white px-3 py-1.5
+                     outline outline-1 -outline-offset-1 outline-gray-300
+                     placeholder:text-gray-400 focus:outline focus:outline-2
+                     focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            ></textarea>
+          </div>
+          <p *ngIf="form.get('description')?.invalid && form.get('description')?.touched"
+             class="mt-2 text-sm text-red-600">
+            La description est requise.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Section 2: Média -->
+    <div class="border-b border-gray-900/10 pb-12">
+      <h2 class="text-base/7 font-semibold text-gray-900">Média</h2>
+      <p class="mt-1 text-sm/6 text-gray-600">
+        Saisissez l’URL de la vidéo et la durée en minutes.
+      </p>
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+        <!-- URL vidéo -->
+        <div class="sm:col-span-4">
+          <label for="videoUrl" class="block text-sm/6 font-medium text-gray-900">
+            URL vidéo
+          </label>
+          <div class="mt-2">
+            <input
+              id="videoUrl"
+              type="url"
+              formControlName="videoUrl"
+              placeholder="https://exemple.com/video.mp4"
+              class="block w-full rounded-md bg-white px-3 py-1.5
+                     outline outline-1 -outline-offset-1 outline-gray-300
+                     placeholder:text-gray-400 focus:outline focus:outline-2
+                     focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            />
+          </div>
+          <p *ngIf="form.get('videoUrl')?.invalid && form.get('videoUrl')?.touched"
+             class="mt-2 text-sm text-red-600">
+            Merci de fournir une URL valide.
+          </p>
+        </div>
+
+        <!-- Durée -->
+        <div class="sm:col-span-2">
+          <label for="duration" class="block text-sm/6 font-medium text-gray-900">
+            Durée (minutes)
+          </label>
+          <div class="mt-2">
+            <input
+              id="duration"
+              type="number"
+              formControlName="duration"
+              min="1"
+              class="block w-full rounded-md bg-white px-3 py-1.5
+                     outline outline-1 -outline-offset-1 outline-gray-300
+                     placeholder:text-gray-400 focus:outline focus:outline-2
+                     focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            />
+          </div>
+          <p *ngIf="form.get('duration')?.invalid && form.get('duration')?.touched"
+             class="mt-2 text-sm text-red-600">
+            La durée doit être d’au moins 1 minute.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer boutons -->
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <button
+      type="button"
+      (click)="cancel()"
+      class="text-sm/6 font-semibold text-gray-900"
+    >
+      Annuler
+    </button>
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white
+             shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2
+             focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+    >
+      {{ isEdit ? 'Mettre à jour' : 'Créer' }}
+    </button>
+  </div>
+
+</form>

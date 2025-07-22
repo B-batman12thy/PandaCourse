@@ -1,0 +1,63 @@
+name: CI
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm run lint
+
+  unit:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm test -- --watch=false --browsers=ChromeHeadless
+
+  e2e:
+    needs: unit
+    runs-on: ubuntu-latest
+    services:
+      api:
+        image: clue/json-server
+        ports:
+          - 3000:80
+        options: >-
+          --entrypoint "json-server --watch /data/db.json --port 80"
+        volumes:
+          - ./:/data
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npx wait-on http://localhost:3000/courses
+      - run: npx cypress run
+
+  build:
+    needs:
+      - unit
+      - e2e
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: pandacourse-dist
+          path: dist/pandacourse

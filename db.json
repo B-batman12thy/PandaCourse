@@ -1,0 +1,60 @@
+{
+  "courses": [
+    {
+      "title": "Introduction  a angular",
+      "description": "ceci est un cours d'initiation a angular",
+      "videoUrl": "https://www.youtube.com/watch?v=xAT0lHYhHMY&ab_channel=Angular",
+      "duration": 340,
+      "id": "a16d"
+    },
+    {
+      "id": "8401",
+      "title": "introduction a react",
+      "description": "test",
+      "videoUrl": "https://www.youtube.com/watch?v=xAT0lHYhHMY&ab_channel=Angular",
+      "duration": 345
+    },
+    {
+      "id": "8401",
+      "title": "introduction a python",
+      "description": "test",
+      "videoUrl": "https://www.youtube.com/watch?v=xAT0lHYhHMY&ab_channel=Angular",
+      "duration": 345
+    },
+    {
+      "id": "8401",
+      "title": "introduction a javascript",
+      "description": "test",
+      "videoUrl": "https://www.youtube.com/watch?v=xAT0lHYhHMY&ab_channel=Angular",
+      "duration": 345
+    },
+    {
+      "id": "8401",
+      "title": "introduction a springboot",
+      "description": "test",
+      "videoUrl": "https://www.youtube.com/watch?v=xAT0lHYhHMY&ab_channel=Angular",
+      "duration": 345
+    },
+    {
+      "id": "8401",
+      "title": "intro a react",
+      "description": "test",
+      "videoUrl": "https://www.youtube.com/watch?v=xAT0lHYhHMY&ab_channel=Angular",
+      "duration": 345
+    },
+    {
+      "id": "8401",
+      "title": "intro a react",
+      "description": "test",
+      "videoUrl": "https://www.youtube.com/watch?v=xAT0lHYhHMY&ab_channel=Angular",
+      "duration": 345
+    },
+    {
+      "id": "8401",
+      "title": "intro a react",
+      "description": "test",
+      "videoUrl": "https://www.youtube.com/watch?v=xAT0lHYhHMY&ab_channel=Angular",
+      "duration": 345
+    }
+  ]
+}

@@ -1,1 +1,31 @@
-<p>course-detail works!</p>
+<section class="p-6 max-w-3xl mx-auto">
+  <button
+    routerLink="/courses"
+    class="mb-6 inline-flex items-center text-gray-600 hover:text-gray-800"
+  >← Retour</button>
+
+  <ng-container *ngIf="course; else loading">
+    <h1 class="text-3xl font-bold mb-4">{{ course.title }}</h1>
+    <img
+      *ngIf="course.imageUrl"
+      [src]="course.imageUrl"
+      alt="{{ course.title }}"
+      class="w-full h-64 object-cover rounded-lg mb-6"
+    />
+    <p class="mb-4 text-gray-700">{{ course.description }}</p>
+    <div class="flex items-center justify-between mb-6">
+      <span class="text-sm text-gray-500">{{ course.duration }} min</span>
+      <button
+  [routerLink]="['/courses', course.id, 'player']"
+  class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500"
+>
+  ▶️ Commencer le cours
+</button>
+
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <p class="text-center text-gray-500">Chargement…</p>
+  </ng-template>
+</section>

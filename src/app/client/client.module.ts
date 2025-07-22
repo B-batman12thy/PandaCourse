@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { ClientRoutingModule } from './client-routing.module';
-
-
+// src/app/client/client.module.ts
+import { NgModule }               from '@angular/core';
+import { CommonModule }           from '@angular/common';
+import { ReactiveFormsModule }    from '@angular/forms';
+import { ClientRoutingModule }    from './client-routing.module';
 @NgModule({
-  declarations: [],
+
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     ClientRoutingModule
   ]
 })
-export class ClientModule { }
+export class ClientModule {}

@@ -1,1 +1,7 @@
-<p>navbar works!</p>
+<nav class="flex gap-4 p-4 bg-gray-800 text-white">
+  <a routerLink="/courses">Catalogue</a>
+  <a *ngIf="auth.getRole() === 'admin'" routerLink="/admin">Admin</a>
+  <button (click)="logout()" class="hover:underline">
+    Logout
+  </button>
+</nav>
